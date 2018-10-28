@@ -1,0 +1,46 @@
+resource "aws_vpc" "${var.appname}"{
+       cidr_block = "10.0.0.0/16"
+
+}
+
+resource "aws_subnet" "${var.appname}-private" {
+        vpc_id = "artemis"
+        cidr_block = "10.0.0.1/24"
+
+}
+
+resource "aws_subnet" "${var.appname}-public" {
+       vpc_id = "artemis"
+      cidr_block = "10.0.0.2/24"
+
+}
+
+resource "aws_internet_gateway" "${var.appname}"  {
+       vpc_id = "artemis"
+
+}
+
+resource "aws_route_table" "${var,appname}"  {
+       vpc_id = "artemis"
+
+       route {
+          cidr_block = "10.0.0.2/24"
+          gateway_id = "artemis.id"
+   }
+}
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
