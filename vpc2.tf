@@ -3,14 +3,12 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_subnet" "artemis-private" {
-  vpc_id = "artemis"
-
+  vpc_id     = "${aws_vpc.main.id}"
   cidr_block = "10.0.1.1/24"
 }
 
 resource "aws_subnet" "artemis-public" {
-  vpc_id = "${aws_vpc.main.id}"
-
+  vpc_id     = "${aws_vpc.main.id}"
   cidr_block = "10.0.2.1/24"
 }
 
@@ -27,9 +25,7 @@ resource "aws_route_table" "artemis" {
   }
 }
 
-resource "aws_route_table_association" "artemis" {  
-  subnet_id = ""
-  route_table_id = "${aws_route_table.artemis.id}"
-
+resource "aws_route_table_association" "artemis" {
+	subnet_id = "${aws_subnet.artemis-public.id}"
+	route_table_id = "${aws_route_table.artemis.id}"
 }
-
